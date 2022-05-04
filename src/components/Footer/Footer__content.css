@@ -1,0 +1,18 @@
+.Footer__content{
+    max-width: 1140px;
+    margin: 79px auto 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 880px) {
+    .Footer__content {
+        margin: 79px 30px 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .Footer__content {
+        margin: 79px 10px 10px 10px;
+    }
+}

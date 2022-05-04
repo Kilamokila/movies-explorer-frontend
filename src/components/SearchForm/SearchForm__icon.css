@@ -1,0 +1,9 @@
+.SearchForm__icon{
+    background-image: url(../../../images/magnifier_gray.svg);
+    width: 22px;
+    height: 22px;
+    margin: 0 10px 0 19px;
+    background-repeat: no-repeat;
+    align-self: center;
+    background-position: center;
+}

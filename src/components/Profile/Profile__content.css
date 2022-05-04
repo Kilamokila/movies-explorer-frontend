@@ -1,0 +1,20 @@
+.Profile__content{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 74px auto 70px;
+    height: 79vh;
+}
+
+@media screen and (max-width: 880px) {
+    .Profile__content {
+        margin: 236px auto 269px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .Profile__content{
+        width: 260px;
+        margin: 70px auto 40px;
+    }
+}

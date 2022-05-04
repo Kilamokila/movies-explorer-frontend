@@ -1,0 +1,20 @@
+.Profile__form-input{
+    color: white;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 31px;
+    text-align: justify;
+    background: #202020;
+    border: none;
+    padding: 10px 0px 0px 0px;;
+    text-align-last: justify;
+}
+
+.Profile__form-input:first-child{
+    border-bottom: 1px rgba(66, 66, 66, 1) solid;
+    padding: 0px 0px 10px 0px;
+}
+
+.Profile__form-input:focus{
+    outline: none;
+}

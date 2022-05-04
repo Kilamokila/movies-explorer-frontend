@@ -1,0 +1,6 @@
+.SearchForm__form{
+    background: #222222;
+    border-radius: 9px;
+    display: flex;
+    justify-content: space-between;
+}

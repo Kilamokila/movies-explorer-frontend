@@ -1,0 +1,8 @@
+.NavTab__content{
+    position: relative;
+    width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #202020;
+}

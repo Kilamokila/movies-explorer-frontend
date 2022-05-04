@@ -1,0 +1,12 @@
+.Header__mobile-menu-button{
+    background-image: url(../../../images/hamburger_icon_white.svg);
+    height: 31px;
+    width: 31px;
+    margin: 25px 27px 24px 0px;
+}
+
+@media screen and (max-width: 321px) {
+    .Header__mobile-menu-button {
+        margin: 0px 14px 0px 0px;;
+    }
+}

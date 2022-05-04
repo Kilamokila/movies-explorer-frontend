@@ -1,0 +1,29 @@
+.Movies__more-films-button{
+    width: 320px;
+    height: 36px;
+    margin: 50px auto 0px;
+    padding: 0;
+    line-height: 36px;
+    border: 1px #424242 solid;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #202020;
+}
+
+.Movies__more-films-button:hover{
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 440px) {
+    .Movies__more-films-button {
+        width: 240px;
+        height: 40px;
+        margin: 50px 40px 80px;
+        line-height: 40px;
+    }
+}

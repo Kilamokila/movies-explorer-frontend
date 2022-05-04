@@ -1,0 +1,19 @@
+.MoviesCard__duration{
+    width: 52px;
+    line-height: 18px;
+    background-color: #2F2F2F;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 11px;
+    text-align: center;
+    color: #8B8B8B;
+    position: absolute;
+    bottom: -2px;
+    right: 14px;
+}
+
+@media screen and (max-width: 400px) {
+    .MoviesCard__duration {
+        right: 0;
+    }
+}

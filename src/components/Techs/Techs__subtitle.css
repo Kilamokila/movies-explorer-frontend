@@ -1,0 +1,24 @@
+.Techs__subtitle{
+    align-self: center;
+    max-width: 460px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    margin-top: 26px;
+    color: white;
+}
+
+@media screen and (max-width: 769px) {
+    .Techs__subtitle {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .Techs__subtitle{
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

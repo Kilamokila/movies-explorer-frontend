@@ -1,0 +1,11 @@
+.AboutMe__links{
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.AboutMe__links:hover{
+    text-decoration: underline;
+}

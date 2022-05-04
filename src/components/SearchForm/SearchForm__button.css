@@ -1,0 +1,27 @@
+.SearchForm__button{
+    background-image: url(../../../images/magnifier_white.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4285F4;
+    border-radius: 48px;
+    width: 80px;
+    height: 40px;
+    border: none;
+    padding: 0;
+    margin-right: 19px;
+    align-self: center;
+}
+
+.SearchForm__button:hover{
+    cursor: pointer;
+    box-shadow: 0 1px 10px #326ed6,
+                0 -1px 10px #326ed6;
+    transition: box-shadow .3s ease;
+}
+
+@media screen and (max-width: 440px) {
+    .SearchForm__button {
+        margin: 0;
+        height: 34px;
+    }
+}

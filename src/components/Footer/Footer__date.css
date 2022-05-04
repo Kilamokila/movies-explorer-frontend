@@ -1,0 +1,16 @@
+.Footer__date{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+@media screen and (max-width: 400px) {
+    .Footer__date{
+        font-size: 12px;
+        line-height: 15px;
+        color: #8B8B8B;
+        margin-top: 30px;
+    }
+}

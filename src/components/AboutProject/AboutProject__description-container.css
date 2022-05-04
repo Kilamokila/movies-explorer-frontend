@@ -1,0 +1,17 @@
+.AboutProject__description-container{
+    display: flex;
+    margin-top: 70px;
+}
+
+@media screen and (max-width: 769px) {
+    .AboutProject__description-container {
+        column-gap: 30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .AboutProject__description-container {
+        flex-direction: column;
+        row-gap: 56px;
+    }
+}

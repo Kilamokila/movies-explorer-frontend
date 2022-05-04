@@ -1,0 +1,6 @@
+.Header__menu-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+}

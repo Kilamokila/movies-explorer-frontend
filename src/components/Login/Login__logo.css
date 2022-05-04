@@ -1,0 +1,16 @@
+.Login__logo{
+    height: 38px;
+    width: 38px;
+    background-image: url(../../../images/S_letter.svg);
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-color: #3DDC84;
+    border-radius: 50%
+}
+
+@media screen and (max-width: 440px) {
+    .Login__logo {
+        align-self: center;
+    }
+}

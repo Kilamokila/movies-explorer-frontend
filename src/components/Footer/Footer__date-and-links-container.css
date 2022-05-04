@@ -1,0 +1,11 @@
+.Footer__date-and-links-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 400px) {
+    .Footer__date-and-links-container{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+}

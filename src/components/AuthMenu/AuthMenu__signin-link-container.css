@@ -1,0 +1,15 @@
+.AuthMenu__signin-link-container{
+    background-color: #3DDC84;
+    border-radius: 5px;
+    width: 76px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 321px) {
+    .AuthMenu__signin-link-container {
+        width: 54px;
+        height: 26px;
+    }
+}

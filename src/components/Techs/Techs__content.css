@@ -1,0 +1,19 @@
+.Techs__content{
+    max-width: 1140px;
+    justify-items: center;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 880px) {
+    .Techs__content {
+        margin: 90px 50px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .Techs__content {
+        margin: 70px 14px;
+    }
+}

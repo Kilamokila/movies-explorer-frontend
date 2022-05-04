@@ -1,0 +1,12 @@
+.AboutMe__container{
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 720px) {
+    .AboutMe__container {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+}

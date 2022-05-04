@@ -1,0 +1,16 @@
+.SearchForm__fieldset{
+    display: flex;
+    border: none;
+    border-right: 1px rgba(80, 80, 80, 0.7) solid;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    height: 40px;
+}
+
+@media screen and (max-width: 440px) {
+    .SearchForm__fieldset {
+        border-right: none;
+        flex-grow: unset;
+    }
+}

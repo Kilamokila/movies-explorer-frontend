@@ -1,0 +1,10 @@
+.Navigation__account-container{
+    width: 100px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(170, 170, 170, 0.3);
+    box-sizing: border-box;
+    border-radius: 50px;
+    justify-content: space-evenly;
+}

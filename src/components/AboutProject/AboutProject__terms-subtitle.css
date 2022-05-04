@@ -1,0 +1,16 @@
+.AboutProject__terms-subtitle{
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #8B8B8B;
+    font-weight: 500;
+    margin: 14px 0 0 0;
+}
+
+@media screen and (max-width: 400px) {
+    .AboutProject__terms-subtitle {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+

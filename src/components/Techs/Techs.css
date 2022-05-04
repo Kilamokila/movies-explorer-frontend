@@ -1,0 +1,11 @@
+.Techs{
+    width: 100%;
+    background-color: #272727;
+}
+
+
+@media screen and (max-width: 400px) {
+    .Techs{
+        background-color: #202020;
+    }
+}

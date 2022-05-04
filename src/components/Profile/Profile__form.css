@@ -1,0 +1,17 @@
+.Profile__form{
+    width: 410px;
+    margin: 123px auto 220px;
+}
+
+@media screen and (max-width: 880px) {
+    .Profile__form {
+        margin: 96px auto 210px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .Profile__form {
+        width: 260px;
+        margin: 80px auto 379px;
+    }
+}

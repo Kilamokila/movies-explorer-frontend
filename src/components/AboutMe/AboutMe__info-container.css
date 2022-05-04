@@ -1,0 +1,19 @@
+.AboutMe__info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-width: 600px;
+    margin-top: 66px;
+}
+
+@media screen and (max-width: 880px) {
+    .AboutMe__info-container {
+        max-width: 364px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .AboutMe__info-container{
+        margin-top: 40px
+    }
+}
