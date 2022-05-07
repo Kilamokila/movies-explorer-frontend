@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import AuthMenu from "../AuthMenu/AuthMenu";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
@@ -10,7 +9,7 @@ function Header({ isTablet, isLoggedIn, handleOpenNavTab}) {
             <div className="Header__menu-container">
                 <Logo />
                 {isTablet && isLoggedIn &&
-                <div className="Header__mobile-menu-button" onClick={handleOpenNavTab}></div>}
+                <div className="Header__mobile-menu-button" onClick={handleOpenNavTab}></div>} 
                 {!isLoggedIn && <AuthMenu/>}
                 {isLoggedIn && !isTablet && <Navigation/>}
             </div>

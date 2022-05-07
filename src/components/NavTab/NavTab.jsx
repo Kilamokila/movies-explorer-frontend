@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
 
-function NavTab({ isOpen, handleNavTab }) {
+function NavTab({ isOpen, handleCloseNavTab }) {
     return(
         <div className={`NavTab ${isOpen && 'NavTab_opened'}`}>
             <nav className="NavTab__content">
-                <button className="NavTab__button" type="button" onClick={handleNavTab}></button>
+                <button className="NavTab__button" type="button" onClick={handleCloseNavTab}></button>
                 <div className="NavTab__link-container">
                     <NavLink activeClassName="Navigation__link_active" className="Navigation__link" exact to="/">Главная</NavLink>
                     <NavLink activeClassName="Navigation__link_active" className="Navigation__link" to="/movies">Фильмы</NavLink>
