@@ -18,8 +18,6 @@ function App() {
     const isMobile = useMediaQuery({ query: `(max-width: 670px)` });
     const [isLoggedIn, setIsLoggedIn] = React.useState(true);
     const [isNavTabOpen, setIsNavTabOpen] = React.useState(false);
-    const [isSaveButtonActive, setIsSaveButtonActive] = React.useState(false);
-    const [isDeleteButtonActive, setIsDeleteButtonActive] = React.useState(false);
 
     function handleOpenNavTab() {
         setIsNavTabOpen(true)

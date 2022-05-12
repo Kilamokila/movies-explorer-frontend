@@ -4,9 +4,3 @@
     align-items: center;
     flex-grow: 1;
 }
-
-@media screen and (max-width: 440px) {
-    .SearchForm__container {
-        flex-grow: unset;
-    }
-}

@@ -5,7 +5,7 @@ function SearchForm( {isMobile} ) {
     return(
         <div className="SearchForm">
             <div className="SearchForm__content">
-                <form className="SearchForm__form" action="#" method="GET" name="movies-search-form" noValidate>
+                <form className="SearchForm__form" action="#" method="GET" name="movies-search-form">
                     <div className="SearchForm__container">
                         <fieldset className="SearchForm__fieldset">
                             {!isMobile && <div className="SearchForm__icon"></div>}
