@@ -3,6 +3,6 @@
     width: 520px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #202020;
 }

@@ -5,6 +5,12 @@
     border-bottom: 1px #424242 solid;
 }
 
+@media screen and (max-width: 1170px) {
+    .SearchForm__content {
+        margin: 70px 20px 10px;
+    }
+}
+
 @media screen and (max-width: 880px) {
     .SearchForm__content {
         margin: 80px 30px 10px;

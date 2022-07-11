@@ -12,7 +12,10 @@ function Techs({ technologies }) {
                 <p className="Techs__subtitle">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
                 <div className="Techs__container">
                     {technologies.map((technology) => 
-                    <Technology name={technology} />
+                    <Technology 
+                        name={technology.name} 
+                        key={technology.id}
+                        />
                     )}
                 </div>
             </div>

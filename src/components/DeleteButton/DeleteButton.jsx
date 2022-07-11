@@ -1,10 +1,8 @@
 import React from "react";
 
-function DeleteButton() {
-    const [isDeleteButtonActive, setIsDeleteButtonActive] = React.useState(false);
-    
+function DeleteButton({ handleRemove }) {
     return(
-        <button className="DeleteButton" type="button"></button>
+        <button className="DeleteButton" type="button" onClick={handleRemove}></button>
     )
 }
 

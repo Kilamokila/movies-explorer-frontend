@@ -1,11 +1,9 @@
 import React from "react";
 
-function SaveButton() {
-
-    const [isSaveButtonActive, setIsSaveButtonActive] = React.useState(false);
+function SaveButton({ handleClick }) {
 
     return(
-        <button className="SaveButton" type="button">Сохранить</button>
+        <button className="SaveButton" type="button" onClick={handleClick}>Сохранить</button>
     )
 }
 

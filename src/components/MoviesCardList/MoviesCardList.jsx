@@ -1,21 +1,16 @@
-import React from "react";
+import React from 'react';
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList() {
+function MoviesCardList({slicedMovies}) {
+
     return(
         <section className="MoviesCardList">
             <div className="MoviesCardList__content">
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
+                {slicedMovies.map((movie) => 
+                <MoviesCard
+                key={movie.id || movie._id}
+                movie={movie}
+                />)}
             </div>
         </section>
     )

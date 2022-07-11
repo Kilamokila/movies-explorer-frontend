@@ -1,20 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import FormError from "../FormError/FormError";
+import { useFormWithValidation } from "../../utils/form-validator";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Login({ /* email, password, name, setEmail, setPassword, setName, handleRegister */ }) {
+function Login({ handleLogin }) {
 
-/*     function handleChangeEmail(e) {
-        setEmail(e.target.value)
+    const currentUser = useContext(CurrentUserContext);
+
+    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+
+    function handleChangeInput(event) {
+        handleChange(event, currentUser);
     }
 
-    function handleChangePassword(e) {
-        setPassword(e.target.value)
+    function onSubmit(event) {
+        handleLogin(event, values['email'], values['password']);
+        console.log(values['email'], values['password']);
+        resetForm();
     }
-
-    function handleChangeName(e) {
-        setName(e.target.value)
-    } */
 
     return (
         <div className="Login">
@@ -25,7 +28,7 @@ function Login({ /* email, password, name, setEmail, setPassword, setName, handl
                     action="#"
                     className="Login__form"
                     method="POST"
-                    /* onSubmit={handleRegister} */
+                    onSubmit={onSubmit}
                 >
                     <fieldset className="Login__form-settings">
                         <label className="Login__input-label" for="email-input">E-mail</label>    
@@ -37,9 +40,9 @@ function Login({ /* email, password, name, setEmail, setPassword, setName, handl
                             required
                             minLength="2"
                             maxLength="40"
-                            /* onChange={handleChangeEmail} */
-                            /* value={email || ""} */ />
-                        <FormError />
+                            onChange={handleChangeInput}
+                            value={values['email']} />
+                        <span className="Login__form-error">{errors['email']}</span>
                         <label className="Login__input-label" for="password-input">Пароль</label>    
                         <input
                             name="password"
@@ -47,12 +50,12 @@ function Login({ /* email, password, name, setEmail, setPassword, setName, handl
                             type="password"
                             className="Login__input"
                             required
-                            minLength="5"
+                            minLength="6"
                             maxLength="20"
-                            /* onChange={handleChangePassword} */
-                            /* value={password || ""} */ />
-                         <FormError />   
-                        <button className="Login__button" type="submit">Войти</button>
+                            onChange={handleChangeInput}
+                            value={values['password']} />
+                        <span className="Login__form-error">{errors['password']}</span>   
+                        <button className="Login__button" type="submit" disabled={!isValid}>Войти</button>
                         <Link className="Login__signin-link" to="/signup">
                             <span className="Login__signin-link-span">Ещё не зарегистрированы?</span> Регистрация</Link>
                     </fieldset>

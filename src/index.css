@@ -73,8 +73,10 @@
 @import url(./components/Footer/Footer__links-container.css);
 @import url(./components/Footer/Footer__link.css);
 @import url(./components/Movies/Movies.css);
+@import url(./components/Movies/Movies__error-title.css);
 @import url(./components/Movies/Movies__more-films-container.css);
 @import url(./components/Movies/Movies__more-films-button.css);
+@import url(./components/Movies/Movies__more-films-button_disabled.css);
 @import url(./components/SearchForm/SearchForm.css);
 @import url(./components/SearchForm/SearchForm__content.css);
 @import url(./components/SearchForm/SearchForm__container.css);
@@ -116,7 +118,7 @@
 @import url(./components/Login/Login__signin-link-span.css);
 @import url(./components/Login/Login__signin-link.css);
 @import url(./components/Login/Login__button.css);
-@import url(./components/FormError/FormError.css);
+@import url(./components/Login/Login__form-error.css);
 @import url(./components/NotFoundPage/NotFoundPage.css);
 @import url(./components/NotFoundPage/NotFoundPage__container.css);
 @import url(./components/NotFoundPage/NotFoundPage__title.css);

@@ -1,20 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-import FormError from "../FormError/FormError";
+import { useFormWithValidation } from "../../utils/form-validator";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Register({ /* email, password, name, setEmail, setPassword, setName, handleRegister */ }) {
+function Register({ handleRegister }) {
 
-/*     function handleChangeEmail(e) {
-        setEmail(e.target.value)
+    const currentUser = useContext(CurrentUserContext);
+
+    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+
+    function handleChangeInput(event) {
+        handleChange(event, currentUser);
     }
 
-    function handleChangePassword(e) {
-        setPassword(e.target.value)
+    function onSubmit(event) {
+        handleRegister(event, values['name'], values['email'], values['password']);
+        resetForm();
     }
-
-    function handleChangeName(e) {
-        setName(e.target.value)
-    } */
 
     return (
         <div className="Login">
@@ -25,7 +27,7 @@ function Register({ /* email, password, name, setEmail, setPassword, setName, ha
                     action="#"
                     className="Login__form"
                     method="POST"
-                    /* onSubmit={handleRegister} */
+                    onSubmit={onSubmit}
                 >
                     <fieldset className="Login__form-settings">
                         <label className="Login__input-label" for="name-input">Имя</label>
@@ -37,9 +39,9 @@ function Register({ /* email, password, name, setEmail, setPassword, setName, ha
                             required
                             minLength="2"
                             maxLength="40"
-                            /* onChange={handleChangeName} */
-                            /* value={name || ""} */ />
-                        <FormError />
+                            onChange={handleChangeInput}
+                            value={values['name']} />
+                        <span className="Login__form-error">{errors['name']}</span>
                         <label className="Login__input-label" for="email-input">E-mail</label>    
                         <input
                             name="email"
@@ -49,9 +51,9 @@ function Register({ /* email, password, name, setEmail, setPassword, setName, ha
                             required
                             minLength="2"
                             maxLength="40"
-                            /* onChange={handleChangeEmail} */
-                            /* value={email || ""} */ />
-                        <FormError />
+                            onChange={handleChangeInput}
+                            value={values['email']} />
+                        <span className="Login__form-error">{errors['email']}</span>
                         <label className="Login__input-label" for="password-input">Пароль</label>    
                         <input
                             name="password"
@@ -59,12 +61,12 @@ function Register({ /* email, password, name, setEmail, setPassword, setName, ha
                             type="password"
                             className="Login__input"
                             required
-                            minLength="5"
+                            minLength="6"
                             maxLength="20"
-                            /* onChange={handleChangePassword} */
-                            /* value={password || ""} */ />
-                         <FormError />   
-                        <button className="Login__button" type="submit">Зарегистрироваться</button>
+                            onChange={handleChangeInput}
+                            value={values['password']} />
+                        <span className="Login__form-error">{errors['password']}</span>   
+                        <button className="Login__button" type="submit" disabled={!isValid}>Зарегистрироваться</button>
                         <Link className="Login__signin-link" to="/signin">
                             <span className="Login__signin-link-span">Уже зарегистрированы?</span> Войти</Link>
                     </fieldset>

@@ -17,6 +17,5 @@
 @media screen and (max-width: 440px) {
     .SearchForm__fieldset {
         border-right: none;
-        flex-grow: unset;
     }
 }

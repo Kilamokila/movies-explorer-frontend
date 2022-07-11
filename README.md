@@ -12,4 +12,8 @@
 
 ## Ссылки проекта:
 
-https://kilamokila.nomoredomains.work
+## Запуск:
+
+1.скачать по ссылке: https://github.com/Kilamokila/movies-explorer-api и установить локально бэкенд;
+2.запустить бэк командой npm run dev на port 3000;
+3.запустить фронт на port 3001;

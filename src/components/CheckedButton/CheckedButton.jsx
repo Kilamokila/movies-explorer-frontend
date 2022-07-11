@@ -1,8 +1,8 @@
 import React from "react";
 
-function CheckedButton() {
+function CheckedButton({ handleClick }) {
     return(
-        <button className="CheckedButton" type="button"></button>
+        <button className="CheckedButton" type="button" onClick={handleClick}></button>
     )
 }
 
