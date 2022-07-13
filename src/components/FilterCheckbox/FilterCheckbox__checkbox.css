@@ -1,0 +1,32 @@
+.FilterCheckbox__checkbox{
+    position: relative;
+    height: 20px;
+    width: 36px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 20px;
+    background-color: #343434;
+}
+
+.FilterCheckbox__checkbox::before{
+    content: '';
+    position: absolute;
+    height: 13px;
+    width: 13px;
+    top: 2px;
+    left: 2px;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid white;
+    transition: .2s;
+    transform: scale(1.1);
+}
+
+.FilterCheckbox__checkbox:checked::before{
+    left: 19px;
+    background-color: #2BE080;
+}
+
+.FilterCheckbox__checkbox:hover{
+    cursor: pointer;
+}

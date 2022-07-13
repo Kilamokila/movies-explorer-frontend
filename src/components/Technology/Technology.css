@@ -1,0 +1,19 @@
+.Technology{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    background-color: #303030;
+    border-radius: 10px;
+    color: white;
+    min-width: 90px;
+}
+
+@media screen and (max-width: 769px) {
+    .Technology {
+        font-size: 12px;
+        line-height: 57px;
+        min-width: 84px;
+    }
+}

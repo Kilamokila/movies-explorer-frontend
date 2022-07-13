@@ -1,0 +1,15 @@
+.AboutProject__backend-terms-illustration{
+    align-content: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    color: #000000;
+    background-color: #3DDC84;
+}
+
+@media screen and (max-width: 400px) {
+    .AboutProject__backend-terms-illustration {
+        font-size: 11px;
+    }
+}

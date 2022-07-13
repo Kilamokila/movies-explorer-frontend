@@ -1,0 +1,10 @@
+.Navigation__account-icon{
+    height: 12px;
+    width: 14px;
+    background-image: url(../../../images/account_icon.svg);
+    background-position: left;
+    background-size: auto;
+    background-repeat: no-repeat;
+    height: 16px;
+    width: 14px;
+}

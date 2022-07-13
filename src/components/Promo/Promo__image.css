@@ -1,0 +1,23 @@
+.Promo__image{
+    height: 244px;
+    width: 722px;
+    background-image: url(../../../images/italic_sign.svg);
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    align-self: end;
+    margin-right: 69px;
+}
+
+@media screen and (max-width: 815px) {
+    .Promo__image {
+        height: 230px;
+        width: 680px;
+        background-size: cover;
+        margin-right: 0px;
+        align-self: center;
+        object-fit: cover;
+        
+    }
+}
+

@@ -1,0 +1,7 @@
+.AboutProject__description-block{
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 14px;
+}

@@ -1,0 +1,26 @@
+.Portfolio__link{
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    color: white;
+    text-decoration: none;
+    margin: 0 0 19px 0;
+}
+
+.Portfolio__link:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 880px) {
+    .Portfolio__link {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .Portfolio__link {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

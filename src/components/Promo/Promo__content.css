@@ -1,0 +1,26 @@
+.Promo__content{
+    height: 450px;
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: center;
+}
+
+@media screen and (max-width: 769px) {
+    .Promo__content {
+        height: 474px;
+        width: 680px;
+        align-self: unset;
+        margin: 300px 44px 70px 44px;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .Promo__content {
+        height: 407px;
+        width: 320px;
+        margin: 183px 0px 40px 0px;
+    }
+}

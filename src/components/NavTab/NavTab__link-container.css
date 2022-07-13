@@ -1,0 +1,7 @@
+.NavTab__link-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 190px;
+    row-gap: 20px;
+}

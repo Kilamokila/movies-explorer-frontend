@@ -1,0 +1,15 @@
+.NavTab__button{
+    position: absolute;
+    background-image: url(../../../images/white_cross_sign.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+    top: 29px;
+    right: 29px;
+    border: unset;
+    padding: unset;
+    background-color: #202020;
+}

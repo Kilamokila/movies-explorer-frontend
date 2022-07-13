@@ -1,0 +1,19 @@
+.MoviesCard__image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 201px;
+    border-radius: 6px;
+}
+
+@media screen and (max-width: 880px) {
+    .MoviesCard__image {
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .MoviesCard__image {
+        height: 168px;
+    }
+}

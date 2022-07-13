@@ -1,0 +1,25 @@
+.CheckedButton{
+    width: 21px;
+    height: 21px;
+    border: none;
+    background-color: #EE3465;
+    border-radius: 30px;
+    background-image: url(../../../images/check_sign.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.CheckedButton:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 400px) {
+    .CheckedButton {
+        top: 10px;
+        right: 10px;
+    }
+}

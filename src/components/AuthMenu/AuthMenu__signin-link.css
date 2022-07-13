@@ -1,0 +1,19 @@
+.AuthMenu__signin-link{
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    margin: auto;
+}
+
+.AuthMenu__signin-link:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 321px) {
+    .AuthMenu__signin-link {
+        font-size: 10px;
+    }
+}

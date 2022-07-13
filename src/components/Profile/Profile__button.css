@@ -1,0 +1,21 @@
+.Profile__button{
+    align-self: center;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0px 0px 16px 0px;
+    border: unset;
+    background: unset;
+}
+
+.Profile__button:disabled:hover{
+    color: rgb(150, 144, 144);
+    cursor: unset;
+}
+
+.Profile__button:hover{
+    color: rgba(238, 52, 101, 1);
+    cursor: pointer;
+}

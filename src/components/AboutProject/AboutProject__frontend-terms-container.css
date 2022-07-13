@@ -1,0 +1,11 @@
+.AboutProject__frontend-terms-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 500px) {
+    .AboutProject__frontend-terms-container {
+        width: 70%;
+    }
+}

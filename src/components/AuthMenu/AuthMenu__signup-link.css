@@ -1,0 +1,18 @@
+.AuthMenu__signup-link{
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.AuthMenu__signup-link:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 321px) {
+    .AuthMenu__signup-link {
+        font-size: 10px;
+    }
+}

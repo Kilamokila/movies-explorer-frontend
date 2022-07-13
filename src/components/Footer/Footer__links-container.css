@@ -1,0 +1,13 @@
+.Footer__links-container{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+@media screen and (max-width: 400px) {
+    .Footer__links-container{
+        align-items: center;
+        flex-direction: column;
+        row-gap: 12px;
+    }
+}

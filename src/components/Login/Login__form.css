@@ -1,0 +1,5 @@
+.Login__form{
+    background: #202020;
+    display: flex;
+    flex-direction: column;
+}

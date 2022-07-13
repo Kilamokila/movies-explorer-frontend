@@ -1,0 +1,19 @@
+.Promo{
+    width: 100%;
+    height: 560px;
+    display: flex;
+    justify-content: center;
+    background-color: #073042;
+}
+
+@media screen and (max-width: 769px) {
+    .Promo {
+        height: 844px;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .Promo {
+        height: 630px;
+    }
+}

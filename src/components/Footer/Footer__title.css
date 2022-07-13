@@ -1,0 +1,15 @@
+.Footer__title{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #8B8B8B;
+    margin: 0 0 20px 0;
+}
+
+@media screen and (max-width: 400px) {
+    .Footer__title{
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

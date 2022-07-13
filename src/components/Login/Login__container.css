@@ -1,0 +1,12 @@
+.Login__container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+}
+
+@media screen and (max-width: 440px) {
+    .Login__container {
+        width: 260px;
+    }
+}

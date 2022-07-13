@@ -1,0 +1,15 @@
+.AboutProject__frontend-terms-illustration{
+    align-content: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    color: white;
+    background-color: #303030;
+}
+
+@media screen and (max-width: 400px) {
+    .AboutProject__frontend-terms-illustration {
+        font-size: 11px;
+    }
+}
