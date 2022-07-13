@@ -44,7 +44,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-    url: 'http://localhost:3000/',
+    url: 'https://api.dan2491.nomoredomains.xyz/',
     headers: {
         'Content-Type': 'application/json',
     }

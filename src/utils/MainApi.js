@@ -27,7 +27,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-    url: 'http://localhost:3000',
+    url: 'https://api.dan2491.nomoredomains.xyz',
     headers: {
         'Content-Type': 'application/json',
     }
