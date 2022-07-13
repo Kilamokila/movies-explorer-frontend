@@ -15,7 +15,6 @@ function Login({ handleLogin }) {
 
     function onSubmit(event) {
         handleLogin(event, values['email'], values['password']);
-        console.log(values['email'], values['password']);
         resetForm();
     }
 
