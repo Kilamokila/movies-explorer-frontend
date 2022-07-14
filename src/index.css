@@ -3,7 +3,8 @@
 @import url(./components/App/App.css);
 @import url(./components/Logo/Logo.css);
 @import url(./components/Header/Header.css);
-@import url(./components/Header/Header__for-logged-in.css);
+@import url(./components/Header/Header__main-page-colour.css);
+@import url(./components/Header/Header__landing-page-colour.css);
 @import url(./components/Header/Header__menu-container.css);
 @import url(./components/Header/Header__mobile-menu-button.css);
 @import url(./components/AuthMenu/AuthMenu__content.css);
@@ -63,6 +64,7 @@
 @import url(./components/Portfolio/Portfolio__link-container.css);
 @import url(./components/Portfolio/Portfolio__link-icon.css);
 @import url(./components/Portfolio/Portfolio__link.css);
+@import url(./components/Portfolio/Portfolio__link-arrow.css);
 @import url(./components/Portfolio/Portfolio__title.css);
 @import url(./components/Footer/Footer.css);
 @import url(./components/Footer/Footer__content.css);

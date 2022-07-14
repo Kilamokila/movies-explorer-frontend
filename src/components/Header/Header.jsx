@@ -2,10 +2,14 @@ import React from "react";
 import AuthMenu from "../AuthMenu/AuthMenu";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
+import { useLocation } from 'react-router-dom';
 
 function Header({ isTablet, isLoggedIn, handleNavTab}) {
+
+    const location = useLocation();
+
     return (
-        <header className={`Header ${isLoggedIn && 'Header__for-logged-in'}`}>
+        <header className={`Header ${location.pathname === '/' ? 'Header__landing-page-colour' : 'Header__main-page-colour'}`}>
             <div className="Header__menu-container">
                 <Logo />
                 {isTablet && isLoggedIn &&
