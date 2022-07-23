@@ -21,7 +21,7 @@ function Login({ handleLogin }) {
     return (
         <div className="Login">
             <div className="Login__container">
-                <div className="Login__logo"></div>
+            <Link className="Login__logo" to="/"></Link>
                 <h2 className="Login__header">Рады видеть!</h2>
                 <form
                     action="#"

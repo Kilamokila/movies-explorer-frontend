@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header/Header';
 import Main from "../Main/Main";
 import { useMediaQuery } from 'react-responsive';
 import technologies from "../../utils/constants";
-import Footer from "../Footer/Footer";
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { MoviesContext } from '../../contexts/MoviesContext';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
+import ProtectedAuthRoutes from '../ProtectedRoutes/ProtectedAuthRoutes';
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import NavTab from '../NavTab/NavTab';
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import * as auth from "../../utils/auth"
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
 import { getItemFromStorage, setItemToStorage, clearStorage } from '../../utils/storage-handlers';
 import { useCallback } from 'react';
-
+import { useFormWithValidation } from '../../utils/form-validator';
+import Preloader from '../Preloader/Preloader';
 
 
 function App() {
-    const history = useHistory();
+    const navigate = useNavigate();
  
     const isTablet = useMediaQuery({ query: `(max-width: 769px)` });
     const isMobile = useMediaQuery({ query: `(max-width: 670px)` });
@@ -33,10 +32,13 @@ function App() {
     const tabletSize = useMediaQuery({ query: `(max-width: 768px)` });
     const mobileSize = useMediaQuery({ query: `(max-width: 480px)` });
 
+    const [loading, setLoading] = useState(true);
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [isNavTabOpen, setIsNavTabOpen] = useState(false);
     const [isCheckboxAcive, setIsCheckboxAcive] = useState(false);
+    const [isCheckboxSavedMoviesAcive, setIsCheckboxSavedMoviesAcive] = useState(false);
 
     const [currentUser, setCurrentUser] = useState({});
 
@@ -55,6 +57,7 @@ function App() {
 
     const [preloaderState, setPreloaderState] = useState(false);
 
+    const { resetForm } = useFormWithValidation();
   //movies functionality
 
     async function fetchAllMovies () {
@@ -142,6 +145,22 @@ function App() {
       
   };
 
+  function filterMovies(movies) {
+    let filteredMovies = []
+    filteredMovies = movies.filter((movie) => {
+       return movie.nameRU.toLowerCase().includes(searchInputValue.toLowerCase())
+    });
+    return filteredMovies
+}
+
+function filterShortMovies(filteredMovies) {
+    let shortMovies = []
+    shortMovies = filteredMovies.filter((movie) => {
+       return movie.duration < 40
+    });
+    return shortMovies
+}
+
   const sliceMovies = useCallback((movies) => movies.slice(0, moviesToRender), [moviesToRender]);
 
   //Interface functionality
@@ -170,17 +189,28 @@ function App() {
 
 //Auth functionality
 
+
     function handleRegister(event, name, email, password) {
         event.preventDefault();
         auth.register(name, email, password).then((res) => {
-          setCurrentUser(res);
-          history.push("/signin")
+          if (res) {
+            setCurrentUser(res);
+            auth.authorize(email, password)
+            .then((data) => {
+              if (data.token) {
+                setItemToStorage('jwt', data.token)
+                setIsLoggedIn(true);
+                alert('Вы успешно зарегистрировались!');
+                navigate("/movies");
+              }
+            })
+          }
         })
           .catch((err) => {
-            console.log(err)
+            alert(err)
           })
       }
-    
+  
 
     function handleLogin(event, email, password) {
       event.preventDefault();
@@ -188,8 +218,8 @@ function App() {
           .then((data) => {
             if (data.token) {
               setItemToStorage('jwt', data.token)
-              setIsLoggedIn(true)
-              history.push('/')
+              setIsLoggedIn(true);
+              navigate("/movies");
             }
           })
           .catch(err => console.log(err));
@@ -253,11 +283,26 @@ function App() {
       tokenCheck()
     }, [isLoggedIn])
 
+    useEffect(() => {
+      try {
+          if (isLoggedIn) {
+              async function initialFetchSavedMovies() {
+                await fetchSavedMovies();
+              }
+              initialFetchSavedMovies();
+          }
+      } catch (error) {
+          console.log(error);
+      }
+  }, []);
+
 
     const moviesContext = {
       isCheckboxAcive,
+      isCheckboxSavedMoviesAcive,
       moviesToRender,
       setIsCheckboxAcive,
+      setIsCheckboxSavedMoviesAcive,
       searchInputValue, 
       setSearchInputValue,
       allMovies,
@@ -279,68 +324,83 @@ function App() {
       fetchAllMovies,
       fetchSavedMovies,
       saveMovie,
-      removeMovie
+      removeMovie,
+      filterMovies,
+      filterShortMovies,
+    }
+    
+
+    function delay(time = 2000) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, time);
+      });
     }
 
-    return (
+    useEffect(() => {
+      delay().then(() => setLoading(false));
+    }, [setLoading]);
+  
+    if (loading) {
+      return <Preloader/>;
+    }
+
+    else {
+       return (
         <CurrentUserContext.Provider value={currentUser}>
           <MoviesContext.Provider value={moviesContext}>
             <div className="App">
-                <Switch>
-                    <Route exact path="/">
-                        <Header isTablet={isTablet} isLoggedIn={isLoggedIn} handleNavTab={handleNavTab}/>
-                        { isTablet && <NavTab isOpen={isNavTabOpen} handleNavTab={handleNavTab}/>}
-                        <Main technologies={technologies}/>
-                        <Footer/>
+                <Routes>
+                    <Route path="/" 
+                      element={
+                        <Main 
+                          technologies={technologies} 
+                          isNavTabOpen={isNavTabOpen} 
+                          handleNavTab={handleNavTab} 
+                          isTablet={isTablet} 
+                          isLoggedIn={isLoggedIn}/>}
+
+                    />
+                    <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn}/>}> 
+                        <Route path='/movies' 
+                               element={
+                                  <Movies                         
+                                    isLoggedIn={isLoggedIn}
+                                    isMobile={isMobile}
+                                    isTablet={isTablet}
+                                    isOpen={isNavTabOpen}
+                                    handleNavTab={handleNavTab}/>}
+                        />
+                        <Route path='/saved-movies' 
+                               element={
+                                  <SavedMovies 
+                                    isMobile={isMobile}
+                                    isTablet={isTablet}
+                                    isOpen={isNavTabOpen}
+                                    handleNavTab={handleNavTab}
+                                    isLoggedIn={isLoggedIn}/>}
+                        />
+                        <Route path='/profile' 
+                               element={
+                                  <Profile                         
+                                    isLoggedIn={isLoggedIn}
+                                    isMobile={isMobile}
+                                    isTablet={isTablet}
+                                    isOpen={isNavTabOpen}
+                                    handleLogout={handleLogout}
+                                    handleUpdateUser={handleUpdateUser}
+                                    handleNavTab={handleNavTab}/>}
+                        />
                     </Route>
-                    <ProtectedRoute 
-                        exact path="/movies"
-                        isMobile={isMobile}
-                        isTablet={isTablet}
-                        isOpen={isNavTabOpen}
-                        handleNavTab={handleNavTab}
-                        isLoggedIn={isLoggedIn}
-                        component={Movies}
-                    >
-                    </ProtectedRoute>
-                    <ProtectedRoute 
-                        exact path="/saved-movies"
-                        isLoggedIn={isLoggedIn}
-                        isMobile={isMobile}
-                        isTablet={isTablet}
-                        isOpen={isNavTabOpen}
-                        handleNavTab={handleNavTab}
-                        component={SavedMovies}
-                    >
-                    </ProtectedRoute>
-                    <ProtectedRoute
-                        exact path="/profile"
-                        isLoggedIn={isLoggedIn}
-                        isMobile={isMobile}
-                        isTablet={isTablet}
-                        isOpen={isNavTabOpen}
-                        handleLogout={handleLogout}
-                        handleUpdateUser={handleUpdateUser}
-                        handleNavTab={handleNavTab}
-                        component={Profile}
-                    >
-                    </ProtectedRoute>
-                    <Route exact path="/signup">
-                        <Register 
-                          handleRegister={handleRegister}/>
+                    <Route element={<ProtectedAuthRoutes isLoggedIn={isLoggedIn}/>}> 
+                      <Route path="/signup" element={<Register handleRegister={handleRegister}/>} />
+                      <Route path="/signin" element={<Login handleLogin={handleLogin}/>} />
                     </Route>
-                    <Route exact path="/signin">
-                        <Login 
-                          handleLogin={handleLogin}/>
-                    </Route>
-                    <Route exact path="*">
-                        <NotFoundPage />
-                    </Route>
-                </Switch>
+                    <Route path="*" element={<NotFoundPage/>} />
+                </Routes>
             </div>
             </MoviesContext.Provider>
         </CurrentUserContext.Provider>
     )
-}
+}}
 
 export default App;

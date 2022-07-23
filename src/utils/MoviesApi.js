@@ -5,7 +5,7 @@ class MoviesApi {
     }
 
     _checkRes(res) {
-        return res.ok ? res.json() : Promise.reject(`Что-то пошло не так: ${res}`);
+        return res.ok ? res.json() : Promise.reject(`Что-то пошло не так: ${res.statusText}`);
     }
 
     getAllMovies() {

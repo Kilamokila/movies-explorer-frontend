@@ -6,6 +6,9 @@
     text-decoration: none;
     align-self: center;
     margin: 184px 0 0 0;
+    background-color: unset;
+    border: unset;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 440px) {

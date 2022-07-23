@@ -3,7 +3,7 @@ import { MoviesContext } from '../../contexts/MoviesContext';
 import { pushDataToStorage } from '../../utils/storage-handlers';
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm( {isMobile, location} ) {
+function SearchForm( {isMobile, location, setIsNothingFound} ) {
 
     const { isCheckboxAcive, 
             searchInputValue,
@@ -15,30 +15,16 @@ function SearchForm( {isMobile, location} ) {
             allMovies,
             savedMovies,
             fetchAllMovies,
-            fetchSavedMovies
+            fetchSavedMovies,
+            filterMovies,
+            filterShortMovies
             } = useContext(MoviesContext);
 
        
     function handleChangeInput(event) {
         setSearchInputValue(event.target.value)
     }
-
-    function filterMovies(movies) {
-        let filteredMovies = []
-        filteredMovies = movies.filter((movie) => {
-           return movie.nameRU.toLowerCase().includes(searchInputValue.toLowerCase())
-        });
-        return filteredMovies
-    }
-
-    function filterShortMovies(filteredMovies) {
-        let shortMovies = []
-        shortMovies = filteredMovies.filter((movie) => {
-           return movie.duration < 40
-        });
-        return shortMovies
-    }
-    
+     
     
     async function onSubmit(event) {
         event.preventDefault();
@@ -48,6 +34,7 @@ function SearchForm( {isMobile, location} ) {
                    const movies =  await fetchAllMovies();
                    const filteredMovies = filterMovies(movies);
                    setFilteredMovies(filteredMovies);
+                   filteredMovies.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
                    const shortMovies = filterShortMovies(filteredMovies);
                    setShortMovies(shortMovies);
                    pushDataToStorage(filteredMovies, shortMovies, searchInputValue, isCheckboxAcive);
@@ -55,6 +42,7 @@ function SearchForm( {isMobile, location} ) {
                 else {
                     const filteredMovies = filterMovies(allMovies);
                     setFilteredMovies(filteredMovies);
+                    filteredMovies.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
                     const shortMovies = filterShortMovies(filteredMovies);
                     setShortMovies(shortMovies);
                     pushDataToStorage(filteredMovies, shortMovies, searchInputValue, isCheckboxAcive);
@@ -98,9 +86,9 @@ function SearchForm( {isMobile, location} ) {
                             <button className="SearchForm__button" type="submit" name="search-form-button" action="#"></button>
                         </fieldset>
                     </div>
-                    {!isMobile && <FilterCheckbox />}
+                    {!isMobile && <FilterCheckbox location={location}/>}
                 </form>
-                {isMobile && <FilterCheckbox />}
+                {isMobile && <FilterCheckbox location={location}/>}
             </div>
         </div>
     )
