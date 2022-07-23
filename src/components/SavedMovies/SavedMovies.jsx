@@ -13,7 +13,6 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
     const location = useLocation();
 
     const { isCheckboxSavedMoviesAcive, 
-        sliceMovies,
         savedShortMovies,
         savedFilteredMovies,
         preloaderState,
@@ -28,13 +27,9 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
                 }, [])
 
         const slicedFilteredMovies = () => {
-            return savedFilteredMovies.length === 0 ? sliceMovies(savedMovies) : sliceMovies(savedFilteredMovies);
+            return savedFilteredMovies.length === 0 ? savedMovies : savedFilteredMovies;
         }
-
-        const slicedShortMovies = () => {
-            return sliceMovies(savedShortMovies);
-        }
-        
+       
     return(
         <>
         <Header 
@@ -46,7 +41,7 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
                 isMobile={isMobile}
                 location={location}
             />
-            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxSavedMoviesAcive ? slicedShortMovies() : slicedFilteredMovies()}/>}
+            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxSavedMoviesAcive ? savedShortMovies : slicedFilteredMovies()}/>}
             { isTablet && <NavTab isOpen={isOpen} handleNavTab={handleNavTab}/>}
         </main>
         <Footer/>

@@ -18,7 +18,6 @@ import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
 import { getItemFromStorage, setItemToStorage, clearStorage } from '../../utils/storage-handlers';
 import { useCallback } from 'react';
-import { useFormWithValidation } from '../../utils/form-validator';
 import Preloader from '../Preloader/Preloader';
 
 
@@ -57,7 +56,6 @@ function App() {
 
     const [preloaderState, setPreloaderState] = useState(false);
 
-    const { resetForm } = useFormWithValidation();
   //movies functionality
 
     async function fetchAllMovies () {
