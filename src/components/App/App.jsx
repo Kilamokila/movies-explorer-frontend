@@ -42,6 +42,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState({});
 
     const [searchInputValue, setSearchInputValue] = useState('');
+    const [searchInputValueSavedFilms, setSearchInputValueSavedFilms] = useState('');
 
     const [allMovies, setAllMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
@@ -205,7 +206,7 @@ function filterShortMovies(filteredMovies) {
           }
         })
           .catch((err) => {
-            alert(err)
+            alert(err);
           })
       }
   
@@ -235,8 +236,10 @@ function filterShortMovies(filteredMovies) {
         event.preventDefault();
         const jwt = getItemFromStorage("jwt")
         mainApi.patchUserData(newUserData, jwt)
-        .then(newUserData => setCurrentUser(newUserData))
-        .catch(err => console.log(err))
+        .then(newUserData => {
+          setCurrentUser(newUserData)
+          alert('Данные пользователя успешно отредактированы')})
+        .catch(err => alert(err))
     }      
 
     
@@ -325,6 +328,8 @@ function filterShortMovies(filteredMovies) {
       removeMovie,
       filterMovies,
       filterShortMovies,
+      setSearchInputValueSavedFilms,
+      searchInputValueSavedFilms
     }
     
 

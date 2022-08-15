@@ -12,8 +12,11 @@ function Profile({ isTablet, isOpen, isLoggedIn, handleNavTab,  handleUpdateUser
 
     function onSubmit(event) {
         handleUpdateUser(event, values);
-        alert('Данные пользователя успешно отредактрованы');
-        resetForm();
+        setValues({
+            ...values,
+            name: currentUser.name,
+            email: currentUser.email
+        })
     }
 
     useEffect(() => {

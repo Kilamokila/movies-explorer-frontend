@@ -17,12 +17,16 @@ function SearchForm( {isMobile, location, setIsNothingFound} ) {
             fetchAllMovies,
             fetchSavedMovies,
             filterMovies,
-            filterShortMovies
+            filterShortMovies,
+            setSearchInputValueSavedFilms,
+            searchInputValueSavedFilms
             } = useContext(MoviesContext);
 
        
     function handleChangeInput(event) {
-        setSearchInputValue(event.target.value)
+        location.pathname === '/movies' ? 
+        setSearchInputValue(event.target.value) : 
+        setSearchInputValueSavedFilms(event.target.value)
     }
      
     
@@ -81,7 +85,7 @@ function SearchForm( {isMobile, location, setIsNothingFound} ) {
                                 type="search" 
                                 name="search-form-field" 
                                 required placeholder="Фильм"
-                                value={searchInputValue}
+                                value={location.pathname === '/movies' ? searchInputValue : searchInputValueSavedFilms}
                                 onChange={handleChangeInput}/>
                             <button className="SearchForm__button" type="submit" name="search-form-button" action="#"></button>
                         </fieldset>

@@ -16,7 +16,6 @@ function Register({ handleRegister }) {
 
     function onSubmit(event) {
         handleRegister(event, values['name'], values['email'], values['password']);
-        resetForm();
     }
 
     useEffect(() => {
