@@ -20,7 +20,6 @@ import { getItemFromStorage, setItemToStorage, clearStorage } from '../../utils/
 import { useCallback } from 'react';
 import Preloader from '../Preloader/Preloader';
 
-
 function App() {
     const navigate = useNavigate();
  
@@ -252,7 +251,9 @@ function filterShortMovies(filteredMovies) {
                 setIsLoggedIn(true)
               }
             }).catch((error) => {
-              console.log(error)
+              console.log(error);
+              setIsLoggedIn(false);
+              clearStorage();
             })
           }
         } else {

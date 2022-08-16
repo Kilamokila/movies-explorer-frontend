@@ -17,7 +17,7 @@ class MoviesApi {
     }
 
     getSavedMoviesData(token) {
-        return fetch(`${this._url}movies`, {
+        return fetch(`${this._url}/movies`, {
             method: "GET",
             headers: { ...this._headers, 'Authorization': `Bearer ${token}` },
         })
@@ -25,7 +25,7 @@ class MoviesApi {
     }
 
     postMovie(movieData, token) {
-        return fetch(`${this._url}movies`, {
+        return fetch(`${this._url}/movies`, {
             method: "POST",
             headers: { ...this._headers, 'Authorization': `Bearer ${token}` },
             body: JSON.stringify(movieData),
@@ -34,7 +34,7 @@ class MoviesApi {
     }
 
     deleteMovie(movieId, token) {
-        return fetch(`${this._url}movies/${movieId}`, {
+        return fetch(`${this._url}/movies/${movieId}`, {
             method: "DELETE",
             headers: { ...this._headers, 'Authorization': `Bearer ${token}` },
         })
@@ -44,7 +44,7 @@ class MoviesApi {
 }
 
 export const moviesApi = new MoviesApi({
-    url: 'https://api.dan2491.nomoredomains.xyz/',
+    url: 'https://api.dan2491.nomoredomains.xyz',
     headers: {
         'Content-Type': 'application/json',
     }
