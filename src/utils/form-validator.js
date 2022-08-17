@@ -1,13 +1,16 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useContext } from "react";
+import validator from "validator";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export function useFormWithValidation() {
+
+    const currentUser = useContext(CurrentUserContext);
 
     const [values, setValues] = useState({});
     const [errors, setErrors] = useState({});
     const [isValid, setIsValid] = useState(false);
 
     const nameRegExpression = /[^[a-zа-яё -]+/i;
-    const emailRegExpression = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
 
     const validateName = (value, currentName, event) => {
         if (value === currentName) {
@@ -78,7 +81,7 @@ export function useFormWithValidation() {
                 'email': 'Введенный адрес электронной почты совпадает с текущим'
             })
             setIsValid(false)
-        } else if (!emailRegExpression.test(value)) {
+        } else if (!validator.isEmail(value)) {
             setErrors({
                 ...errors,
                 'email': 'Несоответствие формату электронной почты'
@@ -99,7 +102,7 @@ export function useFormWithValidation() {
         }
     }
 
-    const validateFields = (inputName, value, event, currentUser) => {
+    const validateFields = (inputName, value, event) => {
         if (inputName === 'name') {
             validateName(value, currentUser.name, event)
         } else if (inputName === 'email') {
@@ -115,7 +118,7 @@ export function useFormWithValidation() {
         }
     }
 
-    const handleChange = (event, currentUser) => {
+    const handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
 
@@ -123,7 +126,7 @@ export function useFormWithValidation() {
             ...values, [name]: value,
         })
 
-        validateFields(name, value, event, currentUser)
+        validateFields(name, value, event)
     }
 
     const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -132,5 +135,5 @@ export function useFormWithValidation() {
         setIsValid(newIsValid)
     }, [setValues, setErrors, setIsValid])
 
-    return { values, handleChange, errors, isValid, resetForm, setIsValid };
+    return { values, handleChange, errors, isValid, resetForm, setIsValid, setValues };
 }

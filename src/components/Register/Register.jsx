@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../utils/form-validator";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useEffect } from "react";
 
 function Register({ handleRegister }) {
 
@@ -15,13 +16,16 @@ function Register({ handleRegister }) {
 
     function onSubmit(event) {
         handleRegister(event, values['name'], values['email'], values['password']);
-        resetForm();
     }
+
+    useEffect(() => {
+        resetForm();
+    }, [ resetForm ]);
 
     return (
         <div className="Login">
             <div className="Login__container">
-                <div className="Login__logo"></div>
+            <Link className="Login__logo" to="/"></Link>
                 <h2 className="Login__header">Добро пожаловть!</h2>
                 <form
                     action="#"

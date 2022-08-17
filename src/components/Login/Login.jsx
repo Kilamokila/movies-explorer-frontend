@@ -7,7 +7,7 @@ function Login({ handleLogin }) {
 
     const currentUser = useContext(CurrentUserContext);
 
-    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+    const { values, errors, isValid, handleChange } = useFormWithValidation();
 
     function handleChangeInput(event) {
         handleChange(event, currentUser);
@@ -15,13 +15,12 @@ function Login({ handleLogin }) {
 
     function onSubmit(event) {
         handleLogin(event, values['email'], values['password']);
-        resetForm();
     }
 
     return (
         <div className="Login">
             <div className="Login__container">
-                <div className="Login__logo"></div>
+            <Link className="Login__logo" to="/"></Link>
                 <h2 className="Login__header">Рады видеть!</h2>
                 <form
                     action="#"

@@ -1,7 +1,7 @@
 export const BASE_URL = 'https://api.dan2491.nomoredomains.xyz';
 
 const checkRes = (res) => {
-    return res.ok ? res.json() : Promise.reject(`Что-то пошло не так: ${res}`);
+    return res.ok ? res.json() : Promise.reject(`Что-то пошло не так: ${res.statusText}`);
 }
 
 export const register = (name, email, password) => {

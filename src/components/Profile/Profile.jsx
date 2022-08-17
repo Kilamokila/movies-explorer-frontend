@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import Header from "../Header/Header";
 import NavTab from "../NavTab/NavTab";
 import { useFormWithValidation } from "../../utils/form-validator";
@@ -8,17 +8,25 @@ function Profile({ isTablet, isOpen, isLoggedIn, handleNavTab,  handleUpdateUser
 
     const currentUser = useContext(CurrentUserContext);
 
-    const { values, errors, isValid, handleChange, resetForm} = useFormWithValidation();
-
-    function handleChangeInput(event) {
-        handleChange(event, currentUser);
-    }
+    const { values, errors, isValid, handleChange, resetForm, setValues} = useFormWithValidation();
 
     function onSubmit(event) {
         handleUpdateUser(event, values);
-        alert('Данные пользователя успешно отредактрованы');
-        resetForm();
+        setValues({
+            ...values,
+            name: currentUser.name,
+            email: currentUser.email
+        })
     }
+
+    useEffect(() => {
+        resetForm();
+        setValues({
+            ...values,
+            name: currentUser.name,
+            email: currentUser.email
+        })
+    }, [currentUser])
 
     return (
         <>
@@ -31,10 +39,10 @@ function Profile({ isTablet, isOpen, isLoggedIn, handleNavTab,  handleUpdateUser
                         <input 
                             className="Profile__form-input" 
                             type="text" 
-                            name="name"
-                            value={values['name'] || ''}
-                            onChange={handleChangeInput}
-                            placeholder={`Имя ${currentUser.name}`}
+                            name="name" 
+                            value={values.name || ''}
+                            onChange={handleChange}
+                            placeholder='Имя'
                             required
                             minLength="2"
                             maxLength="40" />
@@ -43,9 +51,9 @@ function Profile({ isTablet, isOpen, isLoggedIn, handleNavTab,  handleUpdateUser
                             className="Profile__form-input" 
                             type="email"
                             name="email"
-                            value={values['email'] || ''}
-                            onChange={handleChangeInput}
-                            placeholder={`Email ${currentUser.email}`} 
+                            value={values.email || ''}
+                            onChange={handleChange}
+                            placeholder='Email'
                             required
                             minLength="5"
                             maxLength="20" />

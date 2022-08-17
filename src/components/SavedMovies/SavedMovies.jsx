@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -12,15 +12,26 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
 
     const location = useLocation();
 
-    const { isCheckboxAcive, 
-        sliceMovies,
+    const { isCheckboxSavedMoviesAcive, 
         savedShortMovies,
         savedFilteredMovies,
-        preloaderState } = useContext(MoviesContext);
+        preloaderState,
+        filterShortMovies,
+        setSavedShortMovies,
+        savedMovies,                                                                   
+             } = useContext(MoviesContext);
 
-        const slicedFilteredMovies = sliceMovies(savedFilteredMovies);
-        const slicedShortMovies = sliceMovies(savedShortMovies);
 
+        useEffect(() => {
+            const initialShortMoviesToFilter = filterShortMovies(savedMovies);
+            setSavedShortMovies(initialShortMoviesToFilter);
+                }, [])
+
+        const sliceFilteredMovies = () => {
+            return savedFilteredMovies.length === 0 ? savedMovies : savedFilteredMovies;
+        }
+       
+        const slicedFilteredMovies = sliceFilteredMovies()
 
     return(
         <>
@@ -33,7 +44,7 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
                 isMobile={isMobile}
                 location={location}
             />
-            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxAcive ? slicedShortMovies : slicedFilteredMovies}/>}
+            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxSavedMoviesAcive ? savedShortMovies : slicedFilteredMovies}/>}
             { isTablet && <NavTab isOpen={isOpen} handleNavTab={handleNavTab}/>}
         </main>
         <Footer/>
