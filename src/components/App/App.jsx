@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Main from "../Main/Main";
 import { useMediaQuery } from 'react-responsive';
-import technologies from "../../utils/constants";
+import  { amountToAdd, amountToRender, dataRequestPlugs, imageBaseURL, shortMovieDurationTime, technologies } from "../../utils/constants";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { MoviesContext } from '../../contexts/MoviesContext';
@@ -16,7 +16,7 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import * as auth from "../../utils/auth"
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
-import { getItemFromStorage, setItemToStorage, clearStorage } from '../../utils/storage-handlers';
+import { clearStorage } from '../../utils/storage-handlers';
 import { useCallback } from 'react';
 import Preloader from '../Preloader/Preloader';
 
@@ -80,7 +80,7 @@ function App() {
     async function fetchSavedMovies () {
       try {
         setPreloaderState(true);
-        const jwt = getItemFromStorage("jwt");
+        const jwt = localStorage.getItem('jwt');
         if(jwt) {
           const savedMovies = await moviesApi.getSavedMoviesData(jwt);
           if (savedMovies) {
@@ -101,20 +101,20 @@ function App() {
 
     async function saveMovie (movie) {
       const movieData = {
-        country: movie.country || "Страна неизвестна",
-        director: movie.director || "Режиссер неизвестен",
+        country: movie.country || dataRequestPlugs.countryPlug,
+        director: movie.director || dataRequestPlugs.directorPlug,
         duration: movie.duration,
-        year: movie.year || "Год неизвестен",
-        description: movie.description || "Описание отсутствует",
-        image: 'https://api.nomoreparties.co'+ movie.image.url || 'https://thumbs.dreamstime.com/z/portrait-laughing-senior-book-looking-camera-sitting-table-36503063.jpg',
-        trailerLink: movie.trailerLink || 'https://www.youtube.com/watch?v=du-TY1GUFGk&ab_channel=JimmyHere',
-        nameRU: movie.nameRU || 'Неизвестное имя',
-        nameEN: movie.nameEN || 'Uknown name',
-        thumbnail: 'https://api.nomoreparties.co'+ movie.image.url || 'https://thumbs.dreamstime.com/z/portrait-laughing-senior-book-looking-camera-sitting-table-36503063.jpg',
+        year: movie.year || dataRequestPlugs.yearPlug,
+        description: movie.description || dataRequestPlugs.descriptionPlug,
+        image: imageBaseURL + movie.image.url || dataRequestPlugs.imageLinkPlug,
+        trailerLink: movie.trailerLink || dataRequestPlugs.trailerLink,
+        nameRU: movie.nameRU || dataRequestPlugs.rusNamePlug,
+        nameEN: movie.nameEN || dataRequestPlugs.engNamePlug,
+        thumbnail: imageBaseURL + movie.image.url || dataRequestPlugs.imageLinkPlug,
         movieId: movie.id,
       };
       try {
-          const jwt = getItemFromStorage("jwt")
+          const jwt = localStorage.getItem('jwt')
           const hasBeenSaved = await moviesApi.postMovie(movieData, jwt);
           if (hasBeenSaved) {
               setSavedMovies(savedMovies => [ ...savedMovies, hasBeenSaved ]);
@@ -129,7 +129,7 @@ function App() {
       const Id =  movie.movieId || movie.id;
       const movieToRemove = savedMovies.find(savedMovie => savedMovie.movieId === Id);
       try {
-          const jwt = getItemFromStorage("jwt")
+          const jwt = localStorage.getItem('jwt')
           const removeConfirmation = await moviesApi.deleteMovie(movieToRemove._id, jwt);
           if (removeConfirmation) {
               const filteredMovies = savedMovies.filter(savedMovie => Id !== savedMovie.movieId);
@@ -143,10 +143,10 @@ function App() {
       
   };
 
-  function filterMovies(movies) {
+  function filterMovies(movies, input) {
     let filteredMovies = []
     filteredMovies = movies.filter((movie) => {
-       return movie.nameRU.toLowerCase().includes(searchInputValue.toLowerCase())
+       return movie.nameRU.toLowerCase().includes(input.toLowerCase())
     });
     return filteredMovies
 }
@@ -154,7 +154,7 @@ function App() {
 function filterShortMovies(filteredMovies) {
     let shortMovies = []
     shortMovies = filteredMovies.filter((movie) => {
-       return movie.duration < 40
+       return movie.duration < shortMovieDurationTime
     });
     return shortMovies
 }
@@ -173,15 +173,15 @@ function filterShortMovies(filteredMovies) {
 
     const setAmountOfRender = () => {
       if (desktopSize) {
-        setMoviesToRender(12);
-        setRenderCounter(3);
+        setMoviesToRender(amountToRender.desktop);
+        setRenderCounter(amountToAdd.desktop);
       };
       if (tabletSize) {
-        setMoviesToRender(8);
-        setRenderCounter(2);
+        setMoviesToRender(amountToRender.tablet);
+        setRenderCounter(amountToAdd.tablet);
       }
       if (mobileSize) {
-        setMoviesToRender(5)
+        setMoviesToRender(amountToRender.mobile)
       }
     }
 
@@ -196,7 +196,7 @@ function filterShortMovies(filteredMovies) {
             auth.authorize(email, password)
             .then((data) => {
               if (data.token) {
-                setItemToStorage('jwt', data.token)
+                localStorage.setItem('jwt', data.token)
                 setIsLoggedIn(true);
                 alert('Вы успешно зарегистрировались!');
                 navigate("/movies");
@@ -215,25 +215,29 @@ function filterShortMovies(filteredMovies) {
         auth.authorize(email, password)
           .then((data) => {
             if (data.token) {
-              setItemToStorage('jwt', data.token)
+              localStorage.setItem('jwt', data.token)
               setIsLoggedIn(true);
               navigate("/movies");
             }
           })
-          .catch(err => console.log(err));
+          .catch(err => alert(err));
       }
 
 
       function handleLogout(event) {
         event.preventDefault();
         clearStorage();
+        setCurrentUser({});
+        setSavedMovies([]);
+        setSavedFilteredMovies([]);
+        setSavedShortMovies([]);
         tokenCheck();
       }
 
 
       function handleUpdateUser(event, newUserData) {
         event.preventDefault();
-        const jwt = getItemFromStorage("jwt")
+        const jwt = localStorage.getItem('jwt')
         mainApi.patchUserData(newUserData, jwt)
         .then(newUserData => {
           setCurrentUser(newUserData)
@@ -243,8 +247,8 @@ function filterShortMovies(filteredMovies) {
 
     
     function tokenCheck() {
-        if (getItemFromStorage("jwt")) {
-          const jwt = getItemFromStorage("jwt")
+        if (localStorage.getItem('jwt')) {
+          const jwt = localStorage.getItem('jwt')
           if (jwt) {
             auth.getContent(jwt).then((res) => {
               if (res) {
@@ -252,8 +256,6 @@ function filterShortMovies(filteredMovies) {
               }
             }).catch((error) => {
               console.log(error);
-              setIsLoggedIn(false);
-              clearStorage();
             })
           }
         } else {
@@ -269,8 +271,8 @@ function filterShortMovies(filteredMovies) {
 
 
     useEffect(() => {
-      if (getItemFromStorage("jwt")) {
-        const jwt = getItemFromStorage("jwt")
+      if (localStorage.getItem('jwt')) {
+        const jwt = localStorage.getItem('jwt')
         Promise.all([moviesApi.getSavedMoviesData(jwt), mainApi.getUserData(jwt)])
         .then(([moviesData, userData]) => {
           setSavedMovies(moviesData)

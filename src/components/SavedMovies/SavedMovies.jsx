@@ -18,18 +18,21 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
         preloaderState,
         filterShortMovies,
         setSavedShortMovies,
-        savedMovies,                                                                     
+        savedMovies,                                                                   
              } = useContext(MoviesContext);
+
 
         useEffect(() => {
             const initialShortMoviesToFilter = filterShortMovies(savedMovies);
             setSavedShortMovies(initialShortMoviesToFilter);
                 }, [])
 
-        const slicedFilteredMovies = () => {
+        const sliceFilteredMovies = () => {
             return savedFilteredMovies.length === 0 ? savedMovies : savedFilteredMovies;
         }
        
+        const slicedFilteredMovies = sliceFilteredMovies()
+
     return(
         <>
         <Header 
@@ -41,7 +44,7 @@ function SavedMovies( {isMobile, isTablet, isLoggedIn, isOpen, handleNavTab} ) {
                 isMobile={isMobile}
                 location={location}
             />
-            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxSavedMoviesAcive ? savedShortMovies : slicedFilteredMovies()}/>}
+            {preloaderState ? <Preloader/> : <MoviesCardList slicedMovies={isCheckboxSavedMoviesAcive ? savedShortMovies : slicedFilteredMovies}/>}
             { isTablet && <NavTab isOpen={isOpen} handleNavTab={handleNavTab}/>}
         </main>
         <Footer/>

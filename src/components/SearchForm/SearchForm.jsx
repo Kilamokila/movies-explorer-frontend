@@ -36,7 +36,7 @@ function SearchForm( {isMobile, location, setIsNothingFound} ) {
             if (location.pathname === '/movies') {
                 if (allMovies == false) {
                    const movies =  await fetchAllMovies();
-                   const filteredMovies = filterMovies(movies);
+                   const filteredMovies = filterMovies(movies, searchInputValue);
                    setFilteredMovies(filteredMovies);
                    filteredMovies.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
                    const shortMovies = filterShortMovies(filteredMovies);
@@ -44,7 +44,7 @@ function SearchForm( {isMobile, location, setIsNothingFound} ) {
                    pushDataToStorage(filteredMovies, shortMovies, searchInputValue, isCheckboxAcive);
                 }
                 else {
-                    const filteredMovies = filterMovies(allMovies);
+                    const filteredMovies = filterMovies(allMovies, searchInputValue);
                     setFilteredMovies(filteredMovies);
                     filteredMovies.length === 0 ? setIsNothingFound(true) : setIsNothingFound(false);
                     const shortMovies = filterShortMovies(filteredMovies);
@@ -52,16 +52,16 @@ function SearchForm( {isMobile, location, setIsNothingFound} ) {
                     pushDataToStorage(filteredMovies, shortMovies, searchInputValue, isCheckboxAcive);
                 }
             }
-            else {
+            else if (location.pathname === '/saved-movies') {
                 if (savedMovies == false) {
                     const fetchedSavedMovies = await fetchSavedMovies();
-                    const filteredSavedMovies = filterMovies(fetchedSavedMovies);
+                    const filteredSavedMovies = filterMovies(fetchedSavedMovies, searchInputValueSavedFilms);
                     setSavedFilteredMovies(filteredSavedMovies);
                     const filteredShortMovies = filterShortMovies(filteredSavedMovies);
                     setSavedShortMovies(filteredShortMovies);
                 }
                 else {
-                    const filteredSavedMovies = filterMovies(savedMovies);
+                    const filteredSavedMovies = filterMovies(savedMovies, searchInputValueSavedFilms);
                     setSavedFilteredMovies(filteredSavedMovies);
                     const filteredShortMovies = filterShortMovies(filteredSavedMovies);
                     setSavedShortMovies(filteredShortMovies);

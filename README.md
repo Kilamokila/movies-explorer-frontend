@@ -11,9 +11,13 @@
 \*JavaScript;
 
 ## Ссылки проекта:
+
 https://dan2491.nomoredomains.xyz
+https://github.com/Kilamokila/movies-explorer-frontend/pull/4 (пулл-реквест)
+https://www.figma.com/file/fh7lDHpcL0lMIu62BiskEE/Diploma-(Copy)?node-id=891%3A3857 (макет)
 
 ## Запуск:
+
 Чтобы запустить проект в режиме разработки, нужно:
 Склонировать репозиторий в текущую папку:
 git clone git@github.com:Kilamokila/movies-explorer-frontend.git.
